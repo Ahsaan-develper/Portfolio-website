@@ -1,3 +1,11 @@
 @import "tailwindcss";
 
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* IMPORTANT: Add this to prevent the fixed header from covering your titles */
+section {
+  scroll-margin-top: 100px;
+}
