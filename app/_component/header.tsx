@@ -74,7 +74,7 @@ export default function Header() {
             </Link>
           ))}
           
-          
+      
         </nav>
 
         {/* Download CV Button */}
@@ -94,26 +94,34 @@ export default function Header() {
           </a>
         </div>
 
-        {/* Mobile Hamburger & Mode Toggle */}
+        {/* Mobile Hamburger ONLY */}
+        {/* Mobile Hamburger ONLY */}
         <div className="flex items-center gap-4 md:hidden">
-           <button onClick={toggleDarkMode} className="text-slate-600 dark:text-yellow-400">
-             {darkMode ? <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" /></svg> : <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>}
-           </button>
-           
            <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none"
+            className="flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none z-50"
           >
-            <span className={`block w-6 h-0.5 bg-slate-800 dark:bg-white rounded-full transform transition duration-300 ${isMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block w-6 h-0.5 bg-slate-800 dark:bg-white rounded-full transition duration-300 ${isMenuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-0.5 bg-slate-800 dark:bg-white rounded-full transform transition duration-300 ${isMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            {/* Top Bar - Now Black */}
+            <span className={`block w-6 h-0.5 bg-black rounded-full transform transition duration-300 ${
+              isMenuOpen ? "rotate-45 translate-y-2" : ""
+            }`} />
+            
+            {/* Middle Bar - Now Black */}
+            <span className={`block w-6 h-0.5 bg-black rounded-full transition duration-300 ${
+              isMenuOpen ? "opacity-0" : ""
+            }`} />
+            
+            {/* Bottom Bar - Now Black */}
+            <span className={`block w-6 h-0.5 bg-black rounded-full transform transition duration-300 ${
+              isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+            }`} />
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b border-blue-50 dark:border-slate-800 transition-all duration-300 origin-top ${
-        isMenuOpen ? "scale-y-100 opacity-100 visible" : "scale-y-0 opacity-0 invisible"
+      <div className={`absolute top-full left-0 w-full bg-slate-400 dark:bg-slate-900 border-b border-blue-50 dark:border-slate-800 transition-all duration-300 origin-top ${
+        isMenuOpen ? "scale-y-100   opacity-100 visible" : "scale-y-0 opacity-0 invisible"
       }`}>
         <nav className="flex flex-col p-6 space-y-4">
           {["About", "Skills", "Work", "Services"].map((item) => (
