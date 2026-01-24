@@ -1,4 +1,5 @@
 import AboutSection from "./_component/about";
+import EducationPage from "./_component/education";
 import Footer from "./_component/footer";
 import Header from "./_component/header";
 import ProjectShowcase from "./_component/projects";
@@ -10,6 +11,7 @@ export default function Home (){
       <div>
            <Header />
         <section id="about"><AboutSection /></section>
+        <section id="education"><EducationPage /></section>
         <section id="skills"><TechStack /></section>
         <section id="work">  <ProjectShowcase /></section>
         <section id="services"> <ServicesPage /></section>

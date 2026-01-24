@@ -63,8 +63,13 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-slate-900">Stay in touch</h4>
             <p className="text-sm text-slate-500">Get the latest updates on my AI projects.</p>
-              <div className="text-blue-600">
-                Contact us  <span>+92 3049177511</span>
+              <div >
+                Contact me  <span className="text-blue-600">+92 3049177511</span>
+                
+              </div>
+                <div >
+                Email  <span className="text-blue-600">aliahsan80152@gmail.com</span>
+                
               </div>
           </div>
 
