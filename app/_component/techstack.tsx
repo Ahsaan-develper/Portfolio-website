@@ -1,6 +1,15 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 export default function TechStack() {
+  const [animate, setAnimate] = useState(false);
+      useEffect(()=>{
+        const interval = setInterval(() => {
+          setAnimate((prev) => !prev);
+        }, 1000);
+          return () => clearInterval(interval);
+      } , [])
   const skillGroups = [
     {
       title: "Frontend & Design",
@@ -38,11 +47,11 @@ export default function TechStack() {
         </div>
 
         {/* Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1   md:grid-cols-3 gap-8">
           {skillGroups.map((group, i) => (
             <div
               key={i}
-              className="group relative bg-white p-8 rounded-[2rem] border border-blue-50 shadow-[0_15px_40px_-15px_rgba(37,99,235,0.1)] transition-all duration-500 hover:shadow-[0_30px_60px_-20px_rgba(37,99,235,0.2)] hover:-translate-y-2 overflow-hidden"
+              className="group reveal relative bg-white p-8 rounded-[2rem] border border-blue-50 shadow-[0_15px_40px_-15px_rgba(37,99,235,0.1)] transition-all duration-500 hover:shadow-[0_30px_60px_-20px_rgba(37,99,235,0.2)] hover:-translate-y-2 overflow-hidden"
             >
               {/* Background Accent Number */}
               <span className="absolute -right-4 -top-4 text-8xl font-black text-blue-50 opacity-40 transition-transform group-hover:scale-110">
@@ -68,8 +77,11 @@ export default function TechStack() {
 
               {/* Decorative Blue Gradient Corner */}
               <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-transparent to-blue-50/50 rounded-tl-full -mr-10 -mb-10" />
+                            <div className={`w-full  origin-center  bg-blue-600 transition-all h-1 left-0 absolute bottom-0 z-10 duration-500 ${animate ? "scale-x-100" : "scale-x-0"} `}></div>
+
             </div>
           ))}
+
         </div>
       </div>
     </section>

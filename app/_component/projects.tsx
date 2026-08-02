@@ -1,9 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProjectShowcase() {
   const [showMore, setShowMore] = useState(false);
+  const [animate , setAnimate] = useState(false);
+  const [activeIndex , setActiveIndex] = useState(0);
+  // useEffect(()=>{
+  //   const interval = setInterval(() => {
+  //       setAnimate( (prev) => !prev)
+  //   }, 1500);
+  //   return ()=>clearInterval(interval)
+  // },[])
+
+
 
   const mainProjects = [
     {
@@ -12,7 +22,7 @@ export default function ProjectShowcase() {
       desc: "Autonomous AI system matching candidates to roles using advanced gap analysis and agentic workflows.",
       tech: ["OpenAISDK", "Next.js", "FastAPI", "WebSockets", "Postgres"],
       link: "https://www.linkedin.com/posts/ahsaan-ali-785445361_ai-nextjs-fastapi-activity-7411429237993414656-0Hk6",
-      color: "border-blue-500",
+      color: "bg-blue-500",
       glow: "group-hover:shadow-blue-500/20"
     },
     {
@@ -21,7 +31,7 @@ export default function ProjectShowcase() {
       desc: "Real-time voice and text simulation platform providing instant sentiment analysis and technical feedback.",
       tech: ["Next.js", "FastAPI", "Gemini", "MongoAtlas"],
       link: "https://www.linkedin.com/posts/ahsaan-ali-785445361_softwareengineer-fullstackdeveloper-nextjs-activity-7366514370777931778-jU8F",
-      color: "border-purple-500",
+      color: "bg-purple-500",
       glow: "group-hover:shadow-purple-500/20"
     },
     {
@@ -30,7 +40,7 @@ export default function ProjectShowcase() {
       desc: "Comprehensive full-stack management system with predictive analytics and real-time stock tracking.",
       tech: ["Next.js", "FastAPI", "MongoAtlas"],
       link: "https://www.linkedin.com/posts/ahsaan-ali-785445361_softwareengineer-fullstackdeveloper-nextjs-activity-7374103474675941376--DA6",
-      color: "border-emerald-500",
+      color: "bg-emerald-500",
       glow: "group-hover:shadow-emerald-500/20"
     },
   ];
@@ -56,6 +66,12 @@ export default function ProjectShowcase() {
     }
   ];
 
+     useEffect(()=>{
+    const interval = setInterval(() => {
+        setActiveIndex( (prev) => (prev + 1 ) % mainProjects.length);
+    }, 500);
+    return ()=>clearInterval(interval)
+  },[mainProjects.length])
   return (
     <section
       id="work"
@@ -79,8 +95,10 @@ export default function ProjectShowcase() {
           {mainProjects.map((p, i) => (
             <div
               key={i}
-              className={`group relative bg-white p-6 md:p-10 rounded-3xl border-t-4 ${p.color} shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${p.glow}`}
+              className={`group relative bg-white p-6 md:p-10 rounded-3xl shadow-sm transition-all duration-500 hover:-translate-y-2 overflow-hidden hover:shadow-2xl ${p.glow}`}
             >
+              <div className={`  origin-center   transition-all h-1 ${p.color} left-0 absolute top-0 z-10 duration-500 ${activeIndex === i ? "w-0" : "w-full"} `}></div>
+
               <span className="inline-block text-xs md:text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 px-3 py-1 rounded-md border mb-5">
                 {p.category}
               </span>

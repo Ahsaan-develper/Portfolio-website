@@ -1,10 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 export default function EducationPage() {
+    const [animate, setAnimate] = useState(false);
+    useEffect(()=>{
+      const interval = setInterval(() => {
+        setAnimate((prev) => !prev);
+      }, 1000);
+        return () => clearInterval(interval);
+    } , [])
   return (
     <section
       id="education"
-      className="py-12 sm:py-16 md:py-20 bg-slate-50 px-3 sm:px-4 md:px-6"
+      className="py-12 sm:py-16  md:py-20 bg-slate-50 px-3 sm:px-4 md:px-6"
     >
       <div className="max-w-5xl mx-auto">
 
@@ -20,7 +29,7 @@ export default function EducationPage() {
         </div>
 
         {/* Education Card */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-5 sm:p-6 md:p-10 shadow-sm hover:shadow-xl transition-all duration-300">
+        <div className="bg-white relative overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200 p-5 sm:p-6 md:p-10 shadow-sm hover:shadow-xl transition-all duration-300">
 
           {/* Degree + Status */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
@@ -52,7 +61,7 @@ export default function EducationPage() {
           </p>
 
           {/* Subjects / Skills */}
-          <div className="flex flex-wrap gap-2 sm:gap-3">
+          <div className="flex   flex-wrap gap-2 sm:gap-3">
             {[
               "Data Structures",
               "OOP",
@@ -66,9 +75,15 @@ export default function EducationPage() {
                 className="text-[10px] sm:text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full"
               >
                 {skill}
+
               </span>
+              
             ))}
-          </div>
+
+          </div>               
+          <div className={`  origin-center  bg-blue-600 transition-all h-1 left-0 absolute bottom-0 z-10 duration-1000 ${animate ? "w-0" : "w-full"} `}></div>
+
+
         </div>
 
       </div>

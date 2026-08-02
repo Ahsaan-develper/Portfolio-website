@@ -1,6 +1,17 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 export default function ServicesPage() {
+  const [animate, setAnimate] = useState(false);
+  useEffect(()=>{
+    const interval = setInterval(() => {
+      setAnimate((prev) => !prev);
+    }, 1000);
+      return () => clearInterval(interval);
+  } , [])
+ 
+  
   const services = [
     {
       title: "AI Agent Ecosystems",
@@ -51,12 +62,12 @@ export default function ServicesPage() {
           {services.map((service, idx) => (
             <div
               key={idx}
-              className="group bg-white p-6 rounded-2xl border border-slate-100 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 flex flex-col justify-between"
+              className="group relative overflow-hidden bg-white p-6 rounded-2xl  hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500 flex flex-col justify-between"
             >
               {/* Top Content */}
               <div>
                 {/* Icon */}
-                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-5 group-hover:bg-blue-600 transition-colors">
+                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-5 group-hover:bg-blue-600 transition-all duration-500">
                   <svg
                     className="w-5 h-5 text-blue-600 group-hover:text-white"
                     fill="none"
@@ -92,6 +103,7 @@ export default function ServicesPage() {
                   </span>
                 ))}
               </div>
+              <div className={`w-full  origin-center  bg-blue-600 transition-all h-1 left-0 absolute bottom-0 z-10 duration-500 ${animate ? "scale-x-100" : "scale-x-0"} `}></div>
             </div>
           ))}
         </div>

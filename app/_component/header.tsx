@@ -8,7 +8,8 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
- 
+
+  
 
 
 
@@ -22,7 +23,7 @@ export default function Header() {
 
   return (
     <header 
-      className={`fixed top-0 w-full z-20 transition-all duration-300 ease-in-out ${
+      className={`fixed top-0 w-full z-20 transition-all duration-500 ease-in-out ${
         isScrolled 
           ? "py-3 bg-slate-900 backdrop-blur-md  " 
           : "py-6 bg-transparent shadow-sm "
@@ -32,7 +33,7 @@ export default function Header() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center overflow-hidden transition-transform group-hover:rotate-12">
+          <div className="relative w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:rotate-20">
              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
              <span className="text-white font-bold text-lg ">A  </span>
           </div>
@@ -52,7 +53,7 @@ export default function Header() {
               className={`relative group text-sm font-bold uppercase tracking-widest  ${isScrolled ? "text-slate-200": "dark:text-slate-600"} hover:text-blue-600 dark:hover:text-blue-400 transition-colors`}
             >
               {item}
-           
+              <div className="w-0 group-hover:w-[97%] absolute -bottom-3 transition-all duration-500 h-[3px] bg-sky-300"></div>
             </Link>
           ))}
           
@@ -66,7 +67,7 @@ export default function Header() {
             download="Ahsan_Ali_CV.pdf"
             className={`relative inline-flex items-center px-8 py-2.5 overflow-hidden font-bold ${isScrolled ? "text-white" : "text-slate-900"} transition hover:text-white hover:outline-none duration-300 ease-out border-2 rounded-full group`}
           > 
-            <span className={`absolute inset-0 flex items-center justify-center w-full h-full  duration-300 -translate-x-full ${isScrolled ? "bg-transparent"  : "bg-blue-600"}  group-hover:translate-x-0  ease`}>
+            <span className={`absolute inset-0 flex items-center justify-center w-full h-full  duration-500 -translate-x-full ${isScrolled ? "bg-transparent"  : "bg-blue-600"}  group-hover:translate-x-0  ease`}>
               Download Now
             </span>
             <span className={`absolute flex items-center left-0 justify-center w-full h-full  ${isScrolled ? "text-white" : "text-slate-900"} transition-all duration-300 transform group-hover:translate-x-full ease`}>
