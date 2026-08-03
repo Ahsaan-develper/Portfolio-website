@@ -1,9 +1,39 @@
 "use client";
-
-import { useEffect, useState } from "react";
-
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useEffect, useRef, useState } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 export default function EducationPage() {
     const [animate, setAnimate] = useState(false);
+
+const container = useRef(null);
+
+useGSAP(() => {
+  gsap.fromTo(
+    ".education-card",
+    {
+      x: -300,
+      opacity: 0,
+      rotateY: -90,
+      transformPerspective: 1000,
+    },
+    {
+      x: 0,
+      opacity: 1,
+      rotateY: 0,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".education-card",
+        start: "top 80%",
+        end: "top 60%",
+        scrub: true,
+      },
+    }
+  );
+}, { scope: container });
+
     useEffect(()=>{
       const interval = setInterval(() => {
         setAnimate((prev) => !prev);
@@ -11,9 +41,9 @@ export default function EducationPage() {
         return () => clearInterval(interval);
     } , [])
   return (
-    <section
+    <section ref={container}
       id="education"
-      className="py-12 sm:py-16  md:py-20 bg-slate-50 px-3 sm:px-4 md:px-6"
+      className="py-12 sm:py-16 education-section bg-white relative overflow-hidden rounded-2xl  md:py-20  px-3 sm:px-4 md:px-6"
     >
       <div className="max-w-5xl mx-auto">
 
@@ -72,7 +102,7 @@ export default function EducationPage() {
             ].map((skill, i) => (
               <span
                 key={i}
-                className="text-[10px] sm:text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full"
+                className="text-[10px]  education-card sm:text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full"
               >
                 {skill}
 

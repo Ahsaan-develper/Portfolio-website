@@ -1,9 +1,71 @@
 "use client";
+import { gsap } from "gsap";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-import { useEffect, useState } from "react";
+// gsap.to(".move", {
+//   x : 300,
+//   duration : 1
+// })
+// gsap.from(".move",{
+//   x : -200,
+//   opacity : 0,
+//   duration : 1
+// })
+
+// gsap.fromTo(".move", 
+//   {
+//   x: -300,
+//   opacity : 0,
+//     // yoyo : true,
+//     // scale : 0
+
+// } , {
+//   x: 0,
+//     opacity: 1,
+//     duration: 3,
+//     // stagger : 0.2,
+//     z: -100,
+//     yoyo : true ,
+//     ease : "power1.inOut",
+//     repeat : -1,
+//     // scale: 1
+// }
+// )
+
+
 
 export default function TechStack() {
   const [animate, setAnimate] = useState(false);
+
+  
+const container = useRef(null);
+
+useGSAP(() => {
+gsap.utils.toArray<HTMLElement>(".move").forEach((card) => {
+  gsap.fromTo(
+    card,
+    {
+      x: -300,
+      opacity: 0,
+    },
+    {
+      x: 0,
+      opacity: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 80%",
+        end: "top 80%",
+        scrub: true,
+      },
+    }
+  );
+});
+}, { scope: container });
+
       useEffect(()=>{
         const interval = setInterval(() => {
           setAnimate((prev) => !prev);
@@ -30,8 +92,9 @@ export default function TechStack() {
     },
   ];
 
+
   return (
-    <section className="py-24 bg-white px-6 overflow-hidden" id="skills">
+    <section ref={container} className="py-24 skills-section  bg-white  px-6 overflow-hidden" id="skills">
       <div className="max-w-6xl mx-auto">
         {/* Minimal Header */}
         <div className="mb-20 text-center">
@@ -47,11 +110,11 @@ export default function TechStack() {
         </div>
 
         {/* Card Grid */}
-        <div className="grid grid-cols-1   md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1    md:grid-cols-3 gap-8">
           {skillGroups.map((group, i) => (
             <div
               key={i}
-              className="group reveal relative bg-white p-8 rounded-[2rem] border border-blue-50 shadow-[0_15px_40px_-15px_rgba(37,99,235,0.1)] transition-all duration-500 hover:shadow-[0_30px_60px_-20px_rgba(37,99,235,0.2)] hover:-translate-y-2 overflow-hidden"
+              className="group move   relative bg-white p-8 rounded-[2rem] border border-blue-50 shadow-[0_15px_40px_-15px_rgba(37,99,235,0.1)] transition-all duration-500 hover:shadow-[0_30px_60px_-20px_rgba(37,99,235,0.2)] hover:-translate-y-2 overflow-hidden"
             >
               {/* Background Accent Number */}
               <span className="absolute -right-4 -top-4 text-8xl font-black text-blue-50 opacity-40 transition-transform group-hover:scale-110">

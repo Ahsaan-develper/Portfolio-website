@@ -1,17 +1,55 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ServicesPage() {
   const [animate, setAnimate] = useState(false);
-  useEffect(()=>{
+const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setAnimate((prev) => !prev);
     }, 1000);
-      return () => clearInterval(interval);
-  } , [])
- 
-  
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const cards = cardRefs.current as (HTMLDivElement | null)[];
+
+    gsap.set(cards, {
+      x: -120,
+      rotation: -18,
+      opacity: 0,
+      transformOrigin: "left center",
+    });
+
+    const triggerStarts = ["top 50%", "top 60%", "top 70%", "top 90%"];
+
+    cards.forEach((card, idx) => {
+      if (!card) return;
+      gsap.to(card, {
+        x: 0,
+        rotation: 0,
+        opacity: 1,
+        duration: 0.75,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: card,
+          start: triggerStarts[idx] ?? "top 50%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, []);
+
   const services = [
     {
       title: "AI Agent Ecosystems",
@@ -40,33 +78,28 @@ export default function ServicesPage() {
   ];
 
   return (
-    <section
-      id="services"
-      className="py-16 md:py-20 bg-white px-4 md:px-6"
-    >
+    <section id="services" className="py-16 md:py-20 bg-white px-4 md:px-6">
       <div className="max-w-6xl mx-auto">
 
-        {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-xs font-bold text-blue-600 uppercase tracking-[0.3em] mb-2">
             My Expertise
           </h2>
           <h3 className="text-2xl md:text-4xl font-extrabold text-slate-900 leading-tight">
-            Specialized in{" "}
-            <span className="text-blue-600">Modern Tech</span>
+            Specialized in <span className="text-blue-600">Modern Tech</span>
           </h3>
         </div>
 
-        {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, idx) => (
             <div
               key={idx}
-              className="group relative overflow-hidden bg-white p-6 rounded-2xl  hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500 flex flex-col justify-between"
+              ref={(el) => {
+  cardRefs.current[idx] = el;
+}}
+              className="group relative overflow-hidden bg-white p-6 rounded-2xl hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500 flex flex-col justify-between"
             >
-              {/* Top Content */}
               <div>
-                {/* Icon */}
                 <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-5 group-hover:bg-blue-600 transition-all duration-500">
                   <svg
                     className="w-5 h-5 text-blue-600 group-hover:text-white"
@@ -92,7 +125,6 @@ export default function ServicesPage() {
                 </p>
               </div>
 
-              {/* Features */}
               <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
                 {service.features.map((feature, i) => (
                   <span
@@ -103,12 +135,16 @@ export default function ServicesPage() {
                   </span>
                 ))}
               </div>
-              <div className={`w-full  origin-center  bg-blue-600 transition-all h-1 left-0 absolute bottom-0 z-10 duration-500 ${animate ? "scale-x-100" : "scale-x-0"} `}></div>
+
+              <div
+                className={`w-full origin-center bg-blue-600 transition-all h-1 left-0 absolute bottom-0 z-10 duration-500 ${
+                  animate ? "scale-x-100" : "scale-x-0"
+                }`}
+              />
             </div>
           ))}
         </div>
 
-        {/* CTA */}
         <div className="mt-14 md:mt-16 text-center">
           <div className="inline-flex items-center gap-4 px-6 py-3 bg-slate-50 rounded-full border border-slate-200">
             <span className="text-sm md:text-base font-medium text-slate-600">
