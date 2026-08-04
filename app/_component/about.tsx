@@ -54,9 +54,9 @@ export default function AboutSection() {
 
             {/* Main Name */}
             <div className="space-y-2">
-              <h1 className="animate-reveal [animation-delay:200ms] text-[10vw] lg:text-[100px] font-black text-slate-900 leading-[0.8] tracking-[-0.05em]">
-                Ahsan <br />
-                <span className="text-blue-600">Ali<span className="text-slate-200"></span></span>
+              <h1 className="animate-reveal [animation-delay:200ms]  text-[10vw] lg:text-[100px] font-black text-slate-900 leading-[0.8] tracking-[-0.05em]">
+                Ahsan
+                <span className="text-blue-600"> Ali<span className="text-slate-200"></span></span>
               </h1>
               
               <div className="animate-reveal [animation-delay:400ms] flex items-center gap-4 text-slate-400 font-bold text-lg md:text-2xl pt-4">
