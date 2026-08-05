@@ -71,7 +71,7 @@ export default function CursorTrail() {
               height: `${Math.max(size, 3)}px`,
               opacity: 1 - index / TOTAL_CIRCLES,
             }}
-            className="fixed top-0 left-0 rounded-full pointer-events-none z-[999999] bg-blue-500 shadow-[0_0_10px_#3b82f6,0_0_25px_#3b82f6]"
+            className="hidden lg:block fixed top-0 left-0 rounded-full pointer-events-none z-[999999] bg-blue-500 shadow-[0_0_10px_#3b82f6,0_0_25px_#3b82f6]"
           />
         );
       })}
